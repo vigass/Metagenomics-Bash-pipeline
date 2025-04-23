@@ -14,12 +14,12 @@ This repository contains a Bash script (script1.sh) for processing metagenomic p
 ## Prerequisites
 Ensure the following tools are installed and accessible in your PATH:
 
-fastp (>= 0.20.0)
-bowtie2 (>= 2.3.5)
-megahit (>= 1.2.9)
-seqkit (>= 0.12.0)
-prodigal (>= 2.6.3)
-salmon (>= 1.4.0)
+- fastp (>= 0.20.0)
+- bowtie2 (>= 2.3.5)
+- megahit (>= 1.2.9)
+- seqkit (>= 0.12.0)
+- prodigal (>= 2.6.3)
+- salmon (>= 1.4.0)
 
 Additionally, you need:
 
@@ -69,8 +69,9 @@ Clone the repository:git clone https://github.com/your-username/your-repo-name.g
 cd your-repo-name
 
 
-Ensure all required tools are installed (see Prerequisites).
-Verify the host Bowtie2 index path in the script (HOST_INDEX variable). Update it to your local path if necessary:HOST_INDEX="/path/to/your/bowtie2/mouse"
+Ensure all required tools are installed (see Prerequisites).  
+
+Verify the host Bowtie2 index path in the script (HOST_INDEX variable). Update it to your local path if necessary:HOST_INDEX="/path/to/your/bowtie2/mouse"  
 
 
 Update the input directory path in the script (INPUT_DIR variable) to your data directory:INPUT_DIR="/path/to/total_folder"
