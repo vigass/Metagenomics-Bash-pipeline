@@ -1,18 +1,18 @@
 # **Metagenomics Analysis Pipeline**  
 
-This repository contains a Bash script (script1.sh) for processing metagenomic paired-end sequencing data. The pipeline performs quality control, host decontamination, sequence assembly, gene prediction, and abundance quantification, generating organized results for each sample.  
+This repository contains a Bash script (`script1.sh`) for processing metagenomic paired-end sequencing data. The pipeline performs quality control, host decontamination, sequence assembly, gene prediction, and abundance quantification, generating organized results for each sample.  
 
 ## Features
 
-- **Quality Control**: Uses fastp to trim and filter low-quality reads.
-- **Host Decontamination**: Removes host sequences using bowtie2 with a mouse genome index.
-- **Sequence Assembly**: Assembles contigs using megahit.
-- **Sequence Statistics and Filtering**: Generates contig statistics and filters contigs (>500 bp) with seqkit.
-- **Gene Prediction**: Predicts genes on filtered contigs using prodigal.
-- **Abundance Quantification**: Quantifies contig abundance using salmon.
+- **Quality Control**: Uses `fastp` to trim and filter low-quality reads.
+- **Host Decontamination**: Removes host sequences using `bowtie2` with a mouse genome index.
+- **Sequence Assembly**: Assembles contigs using `megahit`.
+- **Sequence Statistics and Filtering**: Generates contig statistics and filters contigs (>500 bp) with `seqkit`.
+- **Gene Prediction**: Predicts genes on filtered contigs using `prodigal`.
+- **Abundance Quantification**: Quantifies contig abundance using `salmon`.
 
 ## Prerequisites
-Ensure the following tools are installed and accessible in your PATH:
+Ensure the following tools are installed and accessible in your `PATH`:
 
 - fastp (>= 0.20.0)
 - bowtie2 (>= 2.3.5)
@@ -23,11 +23,11 @@ Ensure the following tools are installed and accessible in your PATH:
 
 Additionally, you need:
 
-A Bowtie2 index for the host genome (e.g., mouse genome, specified in the script as /mnt/d/Datas/Metagenomics/Base/bowtie2/mouse).
+A Bowtie2 index for the host genome (e.g., mouse genome, specified in the script as `/mnt/d/Datas/Metagenomics/Base/bowtie2/mouse`).
 Input data in paired-end FASTQ format (gzip-compressed).
 
 ## Input Data Structure
-The script expects input data organized in a directory (total_folder) with subdirectories for each sample:
+The script expects input data organized in a directory (`total_folder`) with subdirectories for each sample:
 total_folder/
 ├── sample1/
 │   ├── sample1_1.fastq.gz
@@ -38,8 +38,8 @@ total_folder/
 ...
 
 
-Each sample directory (sampleX) contains paired-end FASTQ files named sampleX_1.fastq.gz and sampleX_2.fastq.gz.
-The script automatically detects sample directories matching the pattern sample*.
+Each sample directory (`sampleX`) contains paired-end FASTQ files named` sampleX_1.fastq.gz` and `sampleX_2.fastq.gz`.
+The script automatically detects sample directories matching the pattern `sample*`.
 
 ## Output Structure
 For each sample, the script creates a result directory (sampleX_results) with the following structure:
