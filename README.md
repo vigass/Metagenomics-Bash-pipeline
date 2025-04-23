@@ -69,30 +69,43 @@ sampleX_results/
 ```
 ## Installation
 
-1. Clone the repository:git clone https://github.com/your-username/your-repo-name.git
+1. Clone the repository:
+```
+git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
+```
+
+3. Ensure all required tools are installed (see Prerequisites).  
 
 
-2. Ensure all required tools are installed (see Prerequisites).  
+4. Verify the host Bowtie2 index path in the script (`HOST_INDEX variable`). Update it to your local path if necessary:
+```
+HOST_INDEX="/path/to/your/bowtie2/mouse"  
+```
 
-Verify the host Bowtie2 index path in the script (HOST_INDEX variable). Update it to your local path if necessary:HOST_INDEX="/path/to/your/bowtie2/mouse"  
-
-
-Update the input directory path in the script (INPUT_DIR variable) to your data directory:INPUT_DIR="/path/to/total_folder"
-
+7. Update the input directory path in the script (`INPUT_DIR variable`) to your data directory:
+```
+INPUT_DIR="/path/to/total_folder"
+```
 
 
 ## Usage
 
-Make the script executable:chmod +x script1.sh
+Make the script executable:
+```
+chmod +x script1.sh
+```
 
-
-Run the script:./script1.sh
+Run the script:
+```
+./script1.sh
+```
 
 The script will process each sample in `INPUT_DIR`, creating result directories (`sampleX_results`) in the current working directory.
 
 ## Example
 Assume your data is in /data/metagenomics/total_folder with two samples:
+
 ```
 /data/metagenomics/total_folder/
 ├── sample1/
@@ -104,24 +117,37 @@ Assume your data is in /data/metagenomics/total_folder with two samples:
 ```
 
 
-Update script1.sh:INPUT_DIR="/data/metagenomics/total_folder"
+Update script1.sh:
+```
+INPUT_DIR="/data/metagenomics/total_folder"
 HOST_INDEX="/path/to/bowtie2/mouse"
+```
 
+Run:
+```
+./script1.sh
+```
 
-Run:./script1.sh
-
-
-Results will be generated in the current directory:./sample1_results/
+Results will be generated in the current directory:
+```
+./sample1_results/
 ./sample2_results/
-
+```
 
 
 ## Notes
 
 **Error Handling**: The script checks for input file existence and tool execution status, skipping failed samples with error messages.
+
+
 **Parallelization**: The script uses multiple threads (4 for fastp/bowtie2, 8 for megahit/salmon). Adjust thread counts (-t, -p) based on your system's resources.
+
+
 **Large Datasets**: For large datasets, consider running the script on a high-performance computing cluster with a job scheduler (e.g., SLURM).
+
+
 **Customization**: Modify tool parameters (e.g., salmon --validateMappings, seqkit -m 500) in the script to suit your analysis needs.
+
 
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request with improvements or bug fixes.
