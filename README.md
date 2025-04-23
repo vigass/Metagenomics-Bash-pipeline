@@ -28,13 +28,13 @@ Input data in paired-end FASTQ format (gzip-compressed).
 
 ## Input Data Structure
 The script expects input data organized in a directory (total_folder) with subdirectories for each sample:
-total_folder/
-├── sample1/
-│   ├── sample1_1.fastq.gz
-│   ├── sample1_2.fastq.gz
-├── sample2/
-│   ├── sample2_1.fastq.gz
-│   ├── sample2_2.fastq.gz
+> total_folder/
+> ├── sample1/
+> │   ├── sample1_1.fastq.gz
+> │   ├── sample1_2.fastq.gz
+> ├── sample2/
+> │   ├── sample2_1.fastq.gz
+> │   ├── sample2_2.fastq.gz
 ...
 
 
@@ -124,5 +124,5 @@ Contributions are welcome! Please open an issue or submit a pull request with im
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 
-# Contact
-For questions or support, please open an issue or contact your-email@example.com.
+## Contact
+For questions or support, please open an issue or contact 1636770513@qq.com.
