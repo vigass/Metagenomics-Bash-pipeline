@@ -4,12 +4,12 @@ This repository contains a Bash script (script1.sh) for processing metagenomic p
 
 ## Features
 
-Quality Control: Uses fastp to trim and filter low-quality reads.
-Host Decontamination: Removes host sequences using bowtie2 with a mouse genome index.
-Sequence Assembly: Assembles contigs using megahit.
-Sequence Statistics and Filtering: Generates contig statistics and filters contigs (>500 bp) with seqkit.
-Gene Prediction: Predicts genes on filtered contigs using prodigal.
-Abundance Quantification: Quantifies contig abundance using salmon.
+- **Quality Control**: Uses fastp to trim and filter low-quality reads.
+- **Host Decontamination**: Removes host sequences using bowtie2 with a mouse genome index.
+- **Sequence Assembly**: Assembles contigs using megahit.
+- **Sequence Statistics and Filtering**: Generates contig statistics and filters contigs (>500 bp) with seqkit.
+- **Gene Prediction**: Predicts genes on filtered contigs using prodigal.
+- **Abundance Quantification**: Quantifies contig abundance using salmon.
 
 ## Prerequisites
 Ensure the following tools are installed and accessible in your PATH:
@@ -28,13 +28,13 @@ Input data in paired-end FASTQ format (gzip-compressed).
 
 ## Input Data Structure
 The script expects input data organized in a directory (total_folder) with subdirectories for each sample:
-> total_folder/
-> ├── sample1/
-> │   ├── sample1_1.fastq.gz
-> │   ├── sample1_2.fastq.gz
-> ├── sample2/
-> │   ├── sample2_1.fastq.gz
-> │   ├── sample2_2.fastq.gz
+total_folder/
+├── sample1/
+│   ├── sample1_1.fastq.gz
+│   ├── sample1_2.fastq.gz
+├── sample2/
+│   ├── sample2_1.fastq.gz
+│   ├── sample2_2.fastq.gz
 ...
 
 
@@ -111,10 +111,10 @@ Results will be generated in the current directory:./sample1_results/
 
 ## Notes
 
-Error Handling: The script checks for input file existence and tool execution status, skipping failed samples with error messages.
-Parallelization: The script uses multiple threads (4 for fastp/bowtie2, 8 for megahit/salmon). Adjust thread counts (-t, -p) based on your system's resources.
-Large Datasets: For large datasets, consider running the script on a high-performance computing cluster with a job scheduler (e.g., SLURM).
-Customization: Modify tool parameters (e.g., salmon --validateMappings, seqkit -m 500) in the script to suit your analysis needs.
+**Error Handling**: The script checks for input file existence and tool execution status, skipping failed samples with error messages.
+**Parallelization**: The script uses multiple threads (4 for fastp/bowtie2, 8 for megahit/salmon). Adjust thread counts (-t, -p) based on your system's resources.
+**Large Datasets**: For large datasets, consider running the script on a high-performance computing cluster with a job scheduler (e.g., SLURM).
+**Customization**: Modify tool parameters (e.g., salmon --validateMappings, seqkit -m 500) in the script to suit your analysis needs.
 
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request with improvements or bug fixes.
