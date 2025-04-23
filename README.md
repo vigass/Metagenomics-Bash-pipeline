@@ -42,7 +42,7 @@ Each sample directory (`sampleX`) contains paired-end FASTQ files named` sampleX
 The script automatically detects sample directories matching the pattern `sample*`.
 
 ## Output Structure
-For each sample, the script creates a result directory (sampleX_results) with the following structure:
+For each sample, the script creates a result directory (`sampleX_results`) with the following structure:
 sampleX_results/
 ├── sampleX_clean_1.fastq.gz        # Quality-controlled FASTQ (R1)
 ├── sampleX_clean_2.fastq.gz        # Quality-controlled FASTQ (R2)
@@ -65,11 +65,11 @@ sampleX_results/
 
 ## Installation
 
-Clone the repository:git clone https://github.com/your-username/your-repo-name.git
+1. Clone the repository:git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
 
 
-Ensure all required tools are installed (see Prerequisites).  
+2. Ensure all required tools are installed (see Prerequisites).  
 
 Verify the host Bowtie2 index path in the script (HOST_INDEX variable). Update it to your local path if necessary:HOST_INDEX="/path/to/your/bowtie2/mouse"  
 
@@ -85,7 +85,7 @@ Make the script executable:chmod +x script1.sh
 
 Run the script:./script1.sh
 
-The script will process each sample in INPUT_DIR, creating result directories (sampleX_results) in the current working directory.
+The script will process each sample in `INPUT_DIR`, creating result directories (`sampleX_results`) in the current working directory.
 
 ## Example
 Assume your data is in /data/metagenomics/total_folder with two samples:
