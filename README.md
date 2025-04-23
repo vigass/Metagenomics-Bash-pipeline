@@ -24,6 +24,8 @@ Ensure the following tools are installed and accessible in your `PATH`:
 Additionally, you need:
 
 A Bowtie2 index for the host genome (e.g., mouse genome, specified in the script as `/mnt/d/Datas/Metagenomics/Base/bowtie2/mouse`).
+
+
 Input data in paired-end FASTQ format (gzip-compressed).
 
 ## Input Data Structure
