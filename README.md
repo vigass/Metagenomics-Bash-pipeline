@@ -179,6 +179,9 @@ Results will be generated in the current directory:
 **Customization**: Modify tool parameters (e.g., salmon --validateMappings, seqkit -m 500) in the script to suit your analysis needs.
 
 
+**WSL2 Environment**: This script was developed and tested in WSL2 (Debian Linux). All data is assumed to be under WSL's mounted `/mnt` directory. When running `megahit`, move input data to `/usr/home/` (or another non-mounted directory) before execution, as `megahit` does not support mounted drives.
+
+
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request with improvements or bug fixes.
 
