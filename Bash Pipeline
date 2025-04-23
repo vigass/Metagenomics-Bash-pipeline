@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# 宿主index
+# Host index
 HOST_INDEX="/mnt/d/Datas/Metagenomics/Base/bowtie2/mouse"
 
 samples=($(ls *_1.fastq.gz | sed 's/_1.fastq.gz//' | sort | uniq))
 
-# 遍历每个样本
+# Traverse each sample
 for sample in "${samples[@]}"; do
     echo "Processing $sample..."
 
@@ -19,14 +19,14 @@ for sample in "${samples[@]}"; do
     html="${outdir}/${sample}_fastp.html"
     json="${outdir}/${sample}_fastp.json"
 
-    # fastp 质控
+    # fastp quality control
     fastp -i "$r1" -I "$r2" -o "$qc_r1" -O "$qc_r2" \
         -h "$html" -j "$json" \
         --thread 4
     echo "$sample fastp done!"
 
 
-    # bowtie2 去除宿主
+    # bowtie2 remove host
     sam="${outdir}/${sample}_host.sam"
     unmap_r1="${outdir}/${sample}_host_removed_1.fastq"
     unmap_r2="${outdir}/${sample}_host_removed_2.fastq"
@@ -38,7 +38,7 @@ for sample in "${samples[@]}"; do
     echo "$sample bowtie2 done!"
 
 
-    # megahit 序列组装
+    # megahit Sequence assembly
     megahit1="${outdir}/${sample}_host_removed_1.fastq"
     megahit2="${outdir}/${sample}_host_removed_2.fastq"
     megahit_out="$outdir/${sample}_megahit"
@@ -56,14 +56,14 @@ for sample in "${samples[@]}"; do
     echo "$sample seqkit done!"
 
 
-    #  prodigal 基因预测
+    #  prodigal gene prediction
     prodigal_out="${outdir}/${sample}_megahit/${sample}.prodigal"
     prodigal -i "${outdir}/${sample}_megahit/contigs_500.fa" \
     -o "$prodigal_out" \
     -p single -f gff -d "${outdir}/${sample}_megahit/contigs_500.fna"
 
 
-    # salmon 丰度预测
+    # salmon abundance prediction
     salmon_index="${outdir}/${sample}_megahit/salmon_index"
     salmon index -t "${outdir}/${sample}_megahit/contigs_500.fna" \
     -i "$salmon_index" \
