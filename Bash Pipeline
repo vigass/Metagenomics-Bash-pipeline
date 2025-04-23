@@ -1,0 +1,82 @@
+#!/bin/bash
+
+# 宿主index
+HOST_INDEX="/mnt/d/Datas/Metagenomics/Base/bowtie2/mouse"
+
+samples=($(ls *_1.fastq.gz | sed 's/_1.fastq.gz//' | sort | uniq))
+
+# 遍历每个样本
+for sample in "${samples[@]}"; do
+    echo "Processing $sample..."
+
+    outdir="${sample}_results"
+    mkdir -p "$outdir"
+
+    r1="${sample}_1.fastq.gz"
+    r2="${sample}_2.fastq.gz"
+    qc_r1="${outdir}/${sample}_clean_1.fastq.gz"
+    qc_r2="${outdir}/${sample}_clean_2.fastq.gz"
+    html="${outdir}/${sample}_fastp.html"
+    json="${outdir}/${sample}_fastp.json"
+
+    # fastp 质控
+    fastp -i "$r1" -I "$r2" -o "$qc_r1" -O "$qc_r2" \
+        -h "$html" -j "$json" \
+        --thread 4
+    echo "$sample fastp done!"
+
+
+    # bowtie2 去除宿主
+    sam="${outdir}/${sample}_host.sam"
+    unmap_r1="${outdir}/${sample}_host_removed_1.fastq"
+    unmap_r2="${outdir}/${sample}_host_removed_2.fastq"
+
+    bowtie2 -x "$HOST_INDEX" -1 "$qc_r1" -2 "$qc_r2" \
+        --un-conc "${outdir}/${sample}_host_removed.fastq" \
+        -S "$sam" \
+        -p 4 2> "${outdir}/${sample}_bowtie2.log"
+    echo "$sample bowtie2 done!"
+
+
+    # megahit 序列组装
+    megahit1="${outdir}/${sample}_host_removed_1.fastq"
+    megahit2="${outdir}/${sample}_host_removed_2.fastq"
+    megahit_out="$outdir/${sample}_megahit"
+    megahit -1 "$megahit1" -2 "$megahit2" \
+    -o "$megahit_out" \
+    --out-prefix "${sample}" \
+    -t 8
+    echo "$sample megahit done!"
+
+
+    # # seqkit 序列组装 
+    contigs="${outdir}/${sample}_megahit/${sample}.contigs.fa"
+    seqkit stats "$contigs" > "${outdir}/${sample}_megahit/contigs_stats.txt"
+    seqkit seq -m 500 "$contigs" > "${outdir}/${sample}_megahit/contigs_500.fa"
+    echo "$sample seqkit done!"
+
+
+    #  prodigal 基因预测
+    prodigal_out="${outdir}/${sample}_megahit/${sample}.prodigal"
+    prodigal -i "${outdir}/${sample}_megahit/contigs_500.fa" \
+    -o "$prodigal_out" \
+    -p single -f gff -d "${outdir}/${sample}_megahit/contigs_500.fna"
+
+
+    # salmon 丰度预测
+    salmon_index="${outdir}/${sample}_megahit/salmon_index"
+    salmon index -t "${outdir}/${sample}_megahit/contigs_500.fna" \
+    -i "$salmon_index" \
+    -p 8
+    salmon quant -i "$salmon_index" \
+    -l A \
+    -1 "$megahit1" \
+    -2 "$megahit2" \
+    -o "${outdir}/${sample}_megahit/salmon" \
+    -p 8 \
+    --validateMappings
+    echo "$sample salmon done!"
+
+
+echo "All done!!!"    
+done
