@@ -29,7 +29,6 @@ Input data in paired-end FASTQ format (gzip-compressed).
 ## Input Data Structure
 The script expects input data organized in a directory (`total_folder`) with subdirectories for each sample:
 ```
-{
 total_folder/
 ├── sample1/
 │   ├── sample1_1.fastq.gz
@@ -38,7 +37,6 @@ total_folder/
 │   ├── sample2_1.fastq.gz
 │   ├── sample2_2.fastq.gz
 ...
-}
 ```
 
 
@@ -48,6 +46,7 @@ The script automatically detects sample directories matching the pattern `sample
 
 ## Output Structure
 For each sample, the script creates a result directory (`sampleX_results`) with the following structure:
+```
 sampleX_results/
 ├── sampleX_clean_1.fastq.gz        # Quality-controlled FASTQ (R1)
 ├── sampleX_clean_2.fastq.gz        # Quality-controlled FASTQ (R2)
@@ -67,7 +66,7 @@ sampleX_results/
 │   ├── salmon/                     # Salmon quantification results
 │   │   ├── quant.sf                # Abundance quantification
 │   │   ├── logs/                   # Salmon logs
-
+```
 ## Installation
 
 1. Clone the repository:git clone https://github.com/your-username/your-repo-name.git
@@ -94,6 +93,7 @@ The script will process each sample in `INPUT_DIR`, creating result directories 
 
 ## Example
 Assume your data is in /data/metagenomics/total_folder with two samples:
+```
 /data/metagenomics/total_folder/
 ├── sample1/
 │   ├── sample1_1.fastq.gz
@@ -101,6 +101,7 @@ Assume your data is in /data/metagenomics/total_folder with two samples:
 ├── sample2/
 │   ├── sample2_1.fastq.gz
 │   ├── sample2_2.fastq.gz
+```
 
 
 Update script1.sh:INPUT_DIR="/data/metagenomics/total_folder"
