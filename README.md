@@ -25,6 +25,35 @@ Additionally, you need:
 
 A Bowtie2 index for the host genome (e.g., mouse genome, specified in the script as `/mnt/d/Datas/Metagenomics/Base/bowtie2/mouse`).
 
+
+**Human**
+```
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.15_GRCh38/GCA_000001405.15_GRCh38_genomic.fna.gz
+gunzip GCA_000001405.15_GRCh38_genomic.fna.gz
+
+bowtie2-build GCA_000001405.15_GRCh38_genomic.fna human
+```
+
+**Mus**
+```
+wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_000001635.9_GRCm39/GCA_000001635.9_GRCm39_genomic.fna.gz
+gunzip GCA_000001635.9_GRCm39_genomic.fna.gz
+
+bowtie2-build GCA_000001635.9_GRCm39_genomic.fna mouse
+
+# From UCSC
+wget -c https://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/mm39.fa.gz
+gunzip mm39.fa.gz
+
+# From EBL
+wget -c https://ftp.ensembl.org/pub/release-110/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
+gunzip Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
+```
+
+Maybe Clink here <https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml> is better!
+
+
+
 Input data in paired-end FASTQ format (`gzip-compressed`).
 
 ## Input Data Structure
