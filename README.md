@@ -28,6 +28,8 @@ Input data in paired-end FASTQ format (gzip-compressed).
 
 ## Input Data Structure
 The script expects input data organized in a directory (`total_folder`) with subdirectories for each sample:
+```
+{
 total_folder/
 ├── sample1/
 │   ├── sample1_1.fastq.gz
@@ -36,6 +38,9 @@ total_folder/
 │   ├── sample2_1.fastq.gz
 │   ├── sample2_2.fastq.gz
 ...
+}
+```
+
 
 
 Each sample directory (`sampleX`) contains paired-end FASTQ files named` sampleX_1.fastq.gz` and `sampleX_2.fastq.gz`.
