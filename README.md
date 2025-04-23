@@ -1,6 +1,8 @@
-Metagenomics Analysis Pipeline
-This repository contains a Bash script (script1.sh) for processing metagenomic paired-end sequencing data. The pipeline performs quality control, host decontamination, sequence assembly, gene prediction, and abundance quantification, generating organized results for each sample.
-Features
+**Metagenomics Analysis Pipeline**  
+
+This repository contains a Bash script (script1.sh) for processing metagenomic paired-end sequencing data. The pipeline performs quality control, host decontamination, sequence assembly, gene prediction, and abundance quantification, generating organized results for each sample.  
+
+# Features
 
 Quality Control: Uses fastp to trim and filter low-quality reads.
 Host Decontamination: Removes host sequences using bowtie2 with a mouse genome index.
@@ -9,7 +11,7 @@ Sequence Statistics and Filtering: Generates contig statistics and filters conti
 Gene Prediction: Predicts genes on filtered contigs using prodigal.
 Abundance Quantification: Quantifies contig abundance using salmon.
 
-Prerequisites
+# Prerequisites
 Ensure the following tools are installed and accessible in your PATH:
 
 fastp (>= 0.20.0)
@@ -24,7 +26,7 @@ Additionally, you need:
 A Bowtie2 index for the host genome (e.g., mouse genome, specified in the script as /mnt/d/Datas/Metagenomics/Base/bowtie2/mouse).
 Input data in paired-end FASTQ format (gzip-compressed).
 
-Input Data Structure
+# Input Data Structure
 The script expects input data organized in a directory (total_folder) with subdirectories for each sample:
 total_folder/
 ├── sample1/
@@ -39,7 +41,7 @@ total_folder/
 Each sample directory (sampleX) contains paired-end FASTQ files named sampleX_1.fastq.gz and sampleX_2.fastq.gz.
 The script automatically detects sample directories matching the pattern sample*.
 
-Output Structure
+# Output Structure
 For each sample, the script creates a result directory (sampleX_results) with the following structure:
 sampleX_results/
 ├── sampleX_clean_1.fastq.gz        # Quality-controlled FASTQ (R1)
@@ -61,7 +63,7 @@ sampleX_results/
 │   │   ├── quant.sf                # Abundance quantification
 │   │   ├── logs/                   # Salmon logs
 
-Installation
+# Installation
 
 Clone the repository:git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
@@ -75,7 +77,7 @@ Update the input directory path in the script (INPUT_DIR variable) to your data 
 
 
 
-Usage
+# Usage
 
 Make the script executable:chmod +x script1.sh
 
@@ -84,7 +86,7 @@ Run the script:./script1.sh
 
 The script will process each sample in INPUT_DIR, creating result directories (sampleX_results) in the current working directory.
 
-Example
+# Example
 Assume your data is in /data/metagenomics/total_folder with two samples:
 /data/metagenomics/total_folder/
 ├── sample1/
@@ -107,16 +109,20 @@ Results will be generated in the current directory:./sample1_results/
 
 
 
-Notes
+# Notes
 
 Error Handling: The script checks for input file existence and tool execution status, skipping failed samples with error messages.
 Parallelization: The script uses multiple threads (4 for fastp/bowtie2, 8 for megahit/salmon). Adjust thread counts (-t, -p) based on your system's resources.
 Large Datasets: For large datasets, consider running the script on a high-performance computing cluster with a job scheduler (e.g., SLURM).
 Customization: Modify tool parameters (e.g., salmon --validateMappings, seqkit -m 500) in the script to suit your analysis needs.
 
-Contributing
+# Contributing
 Contributions are welcome! Please open an issue or submit a pull request with improvements or bug fixes.
-License
+
+
+# License
 This project is licensed under the MIT License. See the LICENSE file for details.
-Contact
+
+
+# Contact
 For questions or support, please open an issue or contact your-email@example.com.
